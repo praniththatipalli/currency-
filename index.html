@@ -2,153 +2,169 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Currency Exchange</title>
+    <title>Movie Explorer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: #333;
+            background: #0f172a;
+            color: #fff;
+        }
+
+        header {
+            background: #020617;
+            padding: 15px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #38bdf8;
+        }
+
+        header input {
+            padding: 8px;
+            width: 200px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        main {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .movie {
+            background: #020617;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .movie:hover {
+            transform: scale(1.05);
+        }
+
+        .movie img {
+            width: 100%;
+            height: 270px;
+            object-fit: cover;
+        }
+
+        .movie-info {
+            padding: 10px;
+        }
+
+        .movie-info h3 {
+            font-size: 16px;
             margin: 0;
         }
 
-        .container {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            width: 320px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #1e3c72;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
+        .movie-info span {
+            float: right;
+            padding: 3px 6px;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            font-size: 12px;
         }
 
-        button {
-            background: #1e3c72;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
+        .green { background: #16a34a; }
+        .orange { background: #f59e0b; }
+        .red { background: #dc2626; }
+
+        .overview {
+            padding: 10px;
+            font-size: 13px;
+            display: none;
         }
 
-        button:hover {
-            background: #16325c;
-        }
-
-        .result {
-            margin-top: 15px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 16px;
+        .movie:hover .overview {
+            display: block;
         }
 
         footer {
             text-align: center;
-            margin-top: 15px;
-            font-size: 12px;
-            color: #777;
+            padding: 15px;
+            background: #020617;
+            font-size: 14px;
+            color: #94a3b8;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Currency Exchange</h2>
+<header>
+    <h1>🎬 Movie Explorer</h1>
+    <input type="text" id="search" placeholder="Search movies...">
+</header>
 
-    <div class="input-group">
-        <label>Amount</label>
-        <input type="number" id="amount" value="1" min="0">
-    </div>
+<main id="main"></main>
 
-    <div class="input-group">
-        <label>From</label>
-        <select id="fromCurrency"></select>
-    </div>
-
-    <div class="input-group">
-        <label>To</label>
-        <select id="toCurrency"></select>
-    </div>
-
-    <button onclick="convertCurrency()">Convert</button>
-
-    <div class="result" id="result"></div>
-
-    <footer>
-        Live exchange rates
-    </footer>
-</div>
+<footer>
+    Data provided by The Movie Database (TMDB)
+</footer>
 
 <script>
-    const fromCurrency = document.getElementById("fromCurrency");
-    const toCurrency = document.getElementById("toCurrency");
-    const result = document.getElementById("result");
+    const API_KEY = "YOUR_API_KEY_HERE";
+    const BASE_URL = "https://api.themoviedb.org/3";
+    const IMG_URL = "https://image.tmdb.org/t/p/w500";
+    const POPULAR_URL = `${BASE_URL}/movie/popular?api_key=${API_KEY}`;
+    const SEARCH_URL = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=`;
 
-    const API_URL = "https://api.exchangerate.host/latest";
+    const main = document.getElementById("main");
+    const search = document.getElementById("search");
 
-    async function loadCurrencies() {
-        const res = await fetch(API_URL);
+    getMovies(POPULAR_URL);
+
+    async function getMovies(url) {
+        const res = await fetch(url);
         const data = await res.json();
-        const currencies = Object.keys(data.rates);
+        showMovies(data.results);
+    }
 
-        currencies.forEach(currency => {
-            const option1 = document.createElement("option");
-            const option2 = document.createElement("option");
-            option1.value = option2.value = currency;
-            option1.textContent = option2.textContent = currency;
-            fromCurrency.appendChild(option1);
-            toCurrency.appendChild(option2);
+    function showMovies(movies) {
+        main.innerHTML = "";
+
+        movies.forEach(movie => {
+            const { title, poster_path, vote_average, overview } = movie;
+
+            const movieEl = document.createElement("div");
+            movieEl.classList.add("movie");
+
+            movieEl.innerHTML = `
+                <img src="${poster_path ? IMG_URL + poster_path : 'https://via.placeholder.com/300x450'}">
+                <div class="movie-info">
+                    <h3>${title}</h3>
+                    <span class="${getClassByRate(vote_average)}">${vote_average.toFixed(1)}</span>
+                </div>
+                <div class="overview">
+                    <strong>Overview:</strong>
+                    <p>${overview}</p>
+                </div>
+            `;
+
+            main.appendChild(movieEl);
         });
-
-        fromCurrency.value = "USD";
-        toCurrency.value = "EUR";
     }
 
-    async function convertCurrency() {
-        const amount = document.getElementById("amount").value;
-        const from = fromCurrency.value;
-        const to = toCurrency.value;
+    function getClassByRate(vote) {
+        if (vote >= 8) return "green";
+        if (vote >= 5) return "orange";
+        return "red";
+    }
 
-        if (amount <= 0) {
-            result.textContent = "Enter a valid amount.";
-            return;
+    search.addEventListener("keyup", (e) => {
+        if (search.value.trim()) {
+            getMovies(SEARCH_URL + search.value);
+        } else {
+            getMovies(POPULAR_URL);
         }
-
-        const res = await fetch(`${API_URL}?base=${from}&symbols=${to}`);
-        const data = await res.json();
-        const rate = data.rates[to];
-
-        const converted = (amount * rate).toFixed(2);
-        result.textContent = `${amount} ${from} = ${converted} ${to}`;
-    }
-
-    loadCurrencies();
+    });
 </script>
 
 </body>
