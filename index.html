@@ -2,170 +2,196 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Movie Explorer</title>
+    <title>Flipkart UI Clone</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: #fff;
         }
 
+        body {
+            background: #f1f3f6;
+        }
+
+        /* HEADER */
         header {
-            background: #020617;
-            padding: 15px;
+            background: #2874f0;
+            padding: 10px 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            color: white;
         }
 
         header h1 {
-            margin: 0;
-            color: #38bdf8;
+            font-size: 22px;
+            margin-right: 20px;
         }
 
-        header input {
+        .search-box {
+            flex: 1;
+            display: flex;
+        }
+
+        .search-box input {
+            width: 100%;
             padding: 8px;
-            width: 200px;
-            border-radius: 5px;
             border: none;
+            border-radius: 2px 0 0 2px;
         }
 
-        main {
-            padding: 20px;
+        .search-box button {
+            padding: 8px 15px;
+            border: none;
+            background: #ffe11b;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .header-links {
+            margin-left: 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* CATEGORY BAR */
+        .categories {
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .categories div {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* BANNER */
+        .banner {
+            background: linear-gradient(to right, #2874f0, #00c6ff);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        /* PRODUCTS */
+        .products {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 15px;
         }
 
-        .movie {
-            background: #020617;
-            border-radius: 10px;
-            overflow: hidden;
+        .product {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
             transition: transform 0.3s;
         }
 
-        .movie:hover {
-            transform: scale(1.05);
+        .product:hover {
+            transform: scale(1.03);
         }
 
-        .movie img {
+        .product img {
             width: 100%;
-            height: 270px;
-            object-fit: cover;
+            height: 180px;
+            object-fit: contain;
         }
 
-        .movie-info {
-            padding: 10px;
+        .product h3 {
+            font-size: 14px;
+            margin: 8px 0;
         }
 
-        .movie-info h3 {
-            font-size: 16px;
-            margin: 0;
+        .price {
+            color: green;
+            font-weight: bold;
         }
 
-        .movie-info span {
-            float: right;
-            padding: 3px 6px;
-            border-radius: 5px;
+        .old-price {
+            text-decoration: line-through;
+            color: gray;
             font-size: 12px;
-        }
-
-        .green { background: #16a34a; }
-        .orange { background: #f59e0b; }
-        .red { background: #dc2626; }
-
-        .overview {
-            padding: 10px;
-            font-size: 13px;
-            display: none;
-        }
-
-        .movie:hover .overview {
-            display: block;
+            margin-left: 5px;
         }
 
         footer {
+            background: #172337;
+            color: white;
             text-align: center;
             padding: 15px;
-            background: #020617;
+            margin-top: 20px;
             font-size: 14px;
-            color: #94a3b8;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🎬 Movie Explorer</h1>
-    <input type="text" id="search" placeholder="Search movies...">
+    <h1>Flipkart</h1>
+    <div class="search-box">
+        <input type="text" placeholder="Search for products, brands and more">
+        <button>Search</button>
+    </div>
+    <div class="header-links">Login</div>
+    <div class="header-links">Cart 🛒</div>
 </header>
 
-<main id="main"></main>
+<div class="categories">
+    <div>Mobiles</div>
+    <div>Fashion</div>
+    <div>Electronics</div>
+    <div>Home</div>
+    <div>Appliances</div>
+    <div>Travel</div>
+</div>
+
+<div class="banner">
+    <h2>Big Billion Days Sale 🎉</h2>
+    <p>Up to 70% off on top brands</p>
+</div>
+
+<div class="products">
+    <div class="product">
+        <img src="https://via.placeholder.com/200">
+        <h3>Smartphone XYZ</h3>
+        <span class="price">₹14,999</span>
+        <span class="old-price">₹19,999</span>
+    </div>
+
+    <div class="product">
+        <img src="https://via.placeholder.com/200">
+        <h3>Wireless Headphones</h3>
+        <span class="price">₹2,499</span>
+        <span class="old-price">₹3,999</span>
+    </div>
+
+    <div class="product">
+        <img src="https://via.placeholder.com/200">
+        <h3>Laptop Pro 15</h3>
+        <span class="price">₹59,999</span>
+        <span class="old-price">₹75,000</span>
+    </div>
+
+    <div class="product">
+        <img src="https://via.placeholder.com/200">
+        <h3>Smart TV 43"</h3>
+        <span class="price">₹23,999</span>
+        <span class="old-price">₹32,999</span>
+    </div>
+</div>
 
 <footer>
-    Data provided by The Movie Database (TMDB)
+    © 2025 Flipkart UI Clone | For Educational Use Only
 </footer>
-
-<script>
-    const API_KEY = "YOUR_API_KEY_HERE";
-    const BASE_URL = "https://api.themoviedb.org/3";
-    const IMG_URL = "https://image.tmdb.org/t/p/w500";
-    const POPULAR_URL = `${BASE_URL}/movie/popular?api_key=${API_KEY}`;
-    const SEARCH_URL = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=`;
-
-    const main = document.getElementById("main");
-    const search = document.getElementById("search");
-
-    getMovies(POPULAR_URL);
-
-    async function getMovies(url) {
-        const res = await fetch(url);
-        const data = await res.json();
-        showMovies(data.results);
-    }
-
-    function showMovies(movies) {
-        main.innerHTML = "";
-
-        movies.forEach(movie => {
-            const { title, poster_path, vote_average, overview } = movie;
-
-            const movieEl = document.createElement("div");
-            movieEl.classList.add("movie");
-
-            movieEl.innerHTML = `
-                <img src="${poster_path ? IMG_URL + poster_path : 'https://via.placeholder.com/300x450'}">
-                <div class="movie-info">
-                    <h3>${title}</h3>
-                    <span class="${getClassByRate(vote_average)}">${vote_average.toFixed(1)}</span>
-                </div>
-                <div class="overview">
-                    <strong>Overview:</strong>
-                    <p>${overview}</p>
-                </div>
-            `;
-
-            main.appendChild(movieEl);
-        });
-    }
-
-    function getClassByRate(vote) {
-        if (vote >= 8) return "green";
-        if (vote >= 5) return "orange";
-        return "red";
-    }
-
-    search.addEventListener("keyup", (e) => {
-        if (search.value.trim()) {
-            getMovies(SEARCH_URL + search.value);
-        } else {
-            getMovies(POPULAR_URL);
-        }
-    });
-</script>
 
 </body>
 </html>
