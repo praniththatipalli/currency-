@@ -2,196 +2,106 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flipkart UI Clone</title>
+    <title>Special Offer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
         body {
+            font-family: Arial, sans-serif;
             background: #f1f3f6;
-        }
-
-        /* HEADER */
-        header {
-            background: #2874f0;
-            padding: 10px 20px;
             display: flex;
+            justify-content: center;
             align-items: center;
-            color: white;
+            height: 100vh;
         }
 
-        header h1 {
-            font-size: 22px;
-            margin-right: 20px;
-        }
-
-        .search-box {
-            flex: 1;
-            display: flex;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 8px;
-            border: none;
-            border-radius: 2px 0 0 2px;
-        }
-
-        .search-box button {
-            padding: 8px 15px;
-            border: none;
-            background: #ffe11b;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .header-links {
-            margin-left: 20px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        /* CATEGORY BAR */
-        .categories {
+        .offer-card {
             background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            font-size: 14px;
-        }
-
-        .categories div {
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* BANNER */
-        .banner {
-            background: linear-gradient(to right, #2874f0, #00c6ff);
-            color: white;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             text-align: center;
-            padding: 30px;
-            margin: 10px;
-            border-radius: 5px;
+            padding: 20px;
         }
 
-        /* PRODUCTS */
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            padding: 15px;
-        }
-
-        .product {
-            background: white;
-            padding: 10px;
-            border-radius: 5px;
-            transition: transform 0.3s;
-        }
-
-        .product:hover {
-            transform: scale(1.03);
-        }
-
-        .product img {
+        .offer-card img {
             width: 100%;
-            height: 180px;
+            height: 220px;
             object-fit: contain;
         }
 
-        .product h3 {
-            font-size: 14px;
-            margin: 8px 0;
+        .offer-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
         }
 
         .price {
+            font-size: 22px;
             color: green;
             font-weight: bold;
         }
 
         .old-price {
-            text-decoration: line-through;
+            font-size: 14px;
             color: gray;
-            font-size: 12px;
+            text-decoration: line-through;
             margin-left: 5px;
         }
 
-        footer {
-            background: #172337;
+        .badge {
+            background: red;
             color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 14px;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-top: 15px;
+            background: #2874f0;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1a5fd0;
+        }
+
+        .note {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #666;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Flipkart</h1>
-    <div class="search-box">
-        <input type="text" placeholder="Search for products, brands and more">
-        <button>Search</button>
-    </div>
-    <div class="header-links">Login</div>
-    <div class="header-links">Cart 🛒</div>
-</header>
+<div class="offer-card">
+    <span class="badge">LIMITED OFFER</span>
 
-<div class="categories">
-    <div>Mobiles</div>
-    <div>Fashion</div>
-    <div>Electronics</div>
-    <div>Home</div>
-    <div>Appliances</div>
-    <div>Travel</div>
-</div>
+    <img src="https://via.placeholder.com/300x220?text=iPhone+15+Pro+Max">
 
-<div class="banner">
-    <h2>Big Billion Days Sale 🎉</h2>
-    <p>Up to 70% off on top brands</p>
-</div>
+    <div class="offer-title">iPhone 15 Pro Max</div>
 
-<div class="products">
-    <div class="product">
-        <img src="https://via.placeholder.com/200">
-        <h3>Smartphone XYZ</h3>
-        <span class="price">₹14,999</span>
-        <span class="old-price">₹19,999</span>
+    <div>
+        <span class="price">₹1</span>
+        <span class="old-price">₹1,59,900</span>
     </div>
 
-    <div class="product">
-        <img src="https://via.placeholder.com/200">
-        <h3>Wireless Headphones</h3>
-        <span class="price">₹2,499</span>
-        <span class="old-price">₹3,999</span>
-    </div>
+    <button>Grab Offer</button>
 
-    <div class="product">
-        <img src="https://via.placeholder.com/200">
-        <h3>Laptop Pro 15</h3>
-        <span class="price">₹59,999</span>
-        <span class="old-price">₹75,000</span>
-    </div>
-
-    <div class="product">
-        <img src="https://via.placeholder.com/200">
-        <h3>Smart TV 43"</h3>
-        <span class="price">₹23,999</span>
-        <span class="old-price">₹32,999</span>
+    <div class="note">
+        * Demo offer UI only. Not a real sale.
     </div>
 </div>
-
-<footer>
-    © 2025 Flipkart UI Clone | For Educational Use Only
-</footer>
 
 </body>
 </html>
